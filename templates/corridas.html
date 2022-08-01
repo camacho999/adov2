@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Corridas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  </head>
+  <body>
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    <div class="alert alert-warning alert-dismisssible fade show" role="alert">
+      <Strong>{{message[0]}} </Strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
+    </div>
+    {% endif %}
+    {% endwith %}
+    <form action="/corridas" method="post">
+
+      <div class="input-group mb-3">
+      <span class="input-group-text">Terminal</span>
+      <input type="text" class="form-control" placeholder="Destino" name="destino">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text">Escalas</span>
+      <input type="text" class="form-control" placeholder="Ciudad o Localidad" id="escala">
+      <span class="input-group-text">$</span>
+      <input type="number" class="form-control" placeholder="$00.00" id="costo">
+      <button class="btn btn-outline-secondary" type="button" id="precio" onclick="add_escala()">Agregar</button>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="escala">Resumen</span>
+      <textarea class="form-control" placeholder="" id="escalas" name="escala" readonly></textarea>
+    </div>
+
+    <div class="input-group mb-3">
+      <button class=" btn btn-outline-secondary" type="submit">Agregar Corrida</button>
+    </div>
+
+    </form>
+
+    <div class="listas">
+      <ul>
+        {% for i in corridas %}
+        <li>{{i.destino}} - {{i.escala}} - {{i.anden}} </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+<!--Script de bootstrap---->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<!--Escript Personalizado-->
+    <script src="{{url_for('static', filename='js/main.js') }} "></script>    
+  </body>
+</html>
