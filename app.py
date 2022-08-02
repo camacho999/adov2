@@ -78,12 +78,12 @@ def horarios():
         mensaje = ""
         destino = request.form['destino']
         escala = request.form['escala']
-        horario = request.form['horario']
+        horario = request.form['horarios']
         anden = request.form['anden']
         if len(destino) == 0 or len(escala) == 0 or len(horario) == 0 or len(anden) == 0:
             mensaje = "Error Todos Los Campos Son Obligatorios"
         else:
-            new_horario = Horario()
+            new_horario = Horarios()
             new_horario.destino = destino 
             new_horario.escala = escala 
             new_horario.horario = horario 

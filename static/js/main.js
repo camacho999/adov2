@@ -18,8 +18,25 @@ function seleccion(id){
 	id = id
 	destino = document.getElementById('destino')
 	escala = document.getElementById('escala') 
-	data = document.getElementById('data'+id).innerHTML
+	
 	datad = document.getElementById('datad'+id).innerHTML
+	data = document.getElementById('data'+id).innerHTML
 	escala.value = data
 	destino.value = datad
+}
+
+function add_hora(){
+	horas = document.getElementById('hora')
+	minutos = document.getElementById('minuto')
+	result = horas.value + ':' + minutos.value
+	if(horarios.value.length == 0){
+		horarios.value = result
+	}
+	else
+	{
+		horarios.value = horarios.value + ',' + result
+	}
+	horas.value = '00'
+	minutos.value = '00'
+
 }
