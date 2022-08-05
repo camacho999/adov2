@@ -28,7 +28,7 @@ function seleccion(id){
 function add_hora(){
 	horas = document.getElementById('hora')
 	minutos = document.getElementById('minuto')
-	result = horas.value + ':' + minutos.value
+	result = horas.value+':'+minutos.value
 	if(horarios.value.length == 0){
 		horarios.value = result
 	}
@@ -36,7 +36,12 @@ function add_hora(){
 	{
 		horarios.value = horarios.value + ',' + result
 	}
-	horas.value = '00'
-	minutos.value = '00'
+	
+}
 
+function reset(){
+	escala = document.getElementById('escala')
+	horarios = document.getElementById('horarios')
+	escala.value = ""
+	horarios.value = ""
 }

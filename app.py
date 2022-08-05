@@ -46,7 +46,7 @@ class Horarios(db.Model):
 #creacion de rutas
 @app.route('/', methods = ['GET'])
 def panel():
-	return "Bienvenido al panel"
+	return render_template('index.html')
 
 
 @app.route('/corridas', methods = ['GET', 'POST'])
