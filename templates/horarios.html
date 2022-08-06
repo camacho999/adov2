@@ -14,12 +14,13 @@
       <!--------Contenido del titulo------------->
 
       <div class="row justify-content-center">
-        <h1>Horarios Servicio Intermedio</h1>
+        <h1 class=" d-flex justify-content-center mb-5">Horarios Servicio Intermedio</h1>
       </div>
 
       <!-----Contenedor de Formulario---------->
-      <div class="formcontent col-md-4 col-ms-12 col-lg-4">
-        <form action="/horarios" method="post">
+      <div class="formcontent col-md-12 col-ms-12 col-lg-4  bg-light m-2 rounded-2 shadow">
+        <h2 class="mb-5">Generar nuevo horario</h2>
+        <form class="mb-5" action="/horarios" method="post">
       <div class="input-group mb-3">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Destino
@@ -43,14 +44,14 @@
         <select name="hora" id="hora" class="form-control form-control-sm">
            <option value = "00"> 00 </option>
            {% for i in range(1,25) %} 
-          <option value=" {{ '%02d' % i }} ">{{ '%02d' % i }} </option>
+          <option value=" {{'%02d' % i }}">{{ '%02d' % i }} </option>
             {% endfor %}
         </select>
         <span class="input-group-text"> : </span>
         <select name="minuto" id="minuto" class="form-control form-control-sm">
           <option value="00">00</option>
-           {% for i in range(1,60,5) %}
-          <option value=" {{ '%02d' % i }} "> {{ '%02d' % i }} </option>
+           {% for i in range(5,60,5) %}
+          <option value="{{ '%02d' % i }}"> {{ '%02d'%i }} </option>
           {% endfor %}
         </select>
         <button class="btn btn-outline-secondary" onclick="add_hora()" type="button">Agregar</button>
@@ -68,9 +69,9 @@
 
 
       <!-------------Contenedor de Tabla-----offset-md-3------------------>
-      <div class="tablecontent col-md-8 col-sm-12 col-lg-8">
-          <table class="table table-sm table-striped offset-2 align-middle offset-sm-0">
-            <caption><h2>Horarios Agregados</h2></caption>
+      <div class="tablecontent col-md-12 col-sm-12 col-lg-7  bg-light m-2 rounded-2 shadow">
+          <h2 class="mb-5 text-center">Horarios agregados</h2>
+          <table class="table table-sm table-striped align-middle">
             <thead>
               <tr>
                 <th>Destino</th>
@@ -81,6 +82,7 @@
               </tr>
             </thead>
             <tbody>
+
               {% for i in horarios%}
               <tr>
                 <td>{{i.destino}}</td>
@@ -88,8 +90,8 @@
                 <td>{{i.horario}}</td>
                 <td>{{i.anden}}</td>
                 <td>
-                  <a href="/edit/{{i.id}}" class="btn btn-outline-success">Editar</a>
-                  <a href="/eliminar/{{i.id}}" class=" btn btn-outline-secondary">Eliminar</a>
+                  <a href="/edit/{{i.id}}" class="btn btn-sm btn-outline-success">Editar</a>
+                  <a href="/delete/{{i.id}}" class=" btn btn-sm btn-outline-secondary">Eliminar</a>
                 </td>
               </tr>
               {% endfor %}

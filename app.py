@@ -103,7 +103,15 @@ def edit(id):
     return redirect(url_for('horarios'))
 
 
-
+@app.route('/delete/<id>', methods = ['GET'])
+def delete(id):
+    id = id 
+    Horarios.query.filter(Horarios.id == id).delete()
+    db.session.commit()
+    
+    flash('Horario Eliminado')
+        
+    return redirect(url_for('horarios'))
 
 if __name__ == '__main__':
     db.create_all()
