@@ -96,6 +96,11 @@ def horarios():
 
     return render_template('horarios.html', horarios = Horarios.query, corridas = Corrida.query)        
 
+@app.route('/edit/<id>', methods = ['GET','POST'])
+def edit(id):
+
+    flash('aun no edita pero ya casi')
+    return redirect(url_for('horarios'))
 
 
 
