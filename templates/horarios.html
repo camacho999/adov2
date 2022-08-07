@@ -13,12 +13,20 @@
 
       <!--------Contenido del titulo------------->
 
-      <div class="row justify-content-center">
-        <h1 class=" d-flex justify-content-center mb-5">Horarios Servicio Intermedio</h1>
+      <div class="row justify-content-center mb-3">
+        <h2 class=" d-flex justify-content-center">Horarios Servicio Intermedio</h2>
       </div>
-
+      <div class="row">
+        <div class="col-3 bg-transparent shadow-lg m-2">
+          <div class="input-group input-group-sm m-2">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Tiempo (S)</span>
+            <input type="number" class="form-control" name="terminal">
+            <a href="/change_terminal" class="btn btn-outline-success">Cambiar</a>
+          </div>
+        </div>
+      </div>
       <!-----Contenedor de Formulario---------->
-      <div class="formcontent col-md-12 col-ms-12 col-lg-4  bg-light m-2 rounded-2 shadow">
+      <div class="formcontent col-md-12 col-ms-12 col-lg-4 m-2 rounded-2 shadow-lg bg-transparent">
         <h2 class="mb-5">Generar nuevo horario</h2>
         <form class="mb-5" action="/horarios" method="post">
       <div class="input-group mb-3">
@@ -62,14 +70,14 @@
         <textarea class="form-control form-control-sm" placeholder="" id="horarios" name="horarios" readonly></textarea>
       </div>
 
-      <button class="btn btn-success" type="submit">Agregar Horario</button>
-      <button class="btn btn-secondary" onclick="reset()" type="button">Limpiar Campos</button>
+      <button class="btn btn-outline-success" type="submit">Agregar Horario</button>
+      <button class="btn btn-outline-secondary" onclick="reset()" type="button">Limpiar Campos</button>
       </form>    
       </div>
 
 
       <!-------------Contenedor de Tabla-----offset-md-3------------------>
-      <div class="tablecontent col-md-12 col-sm-12 col-lg-7  bg-light m-2 rounded-2 shadow">
+      <div class="tablecontent col-md-12 col-sm-12 col-lg-7 m-2 rounded-2 shadow-lg bg-transparent">
           <h2 class="mb-5 text-center">Horarios agregados</h2>
           <table class="table table-sm table-striped align-middle">
             <thead>
