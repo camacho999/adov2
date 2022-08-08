@@ -27,6 +27,7 @@ class Terminal(db.Model):
     __tablename__ = "terminal"
     id = db.Column(db.Integer, primary_key = True)
     terminal = db.Column(db.String, nullable = False)
+    time = db.column(db.Integer)
 
 class Horarios(db.Model):
     __tablename__ = "horario"
@@ -96,11 +97,26 @@ def horarios():
 
     return render_template('horarios.html', horarios = Horarios.query, corridas = Corrida.query)        
 
-@app.route('/edit/<id>', methods = ['GET','POST'])
+@app.route('/edith/<id>', methods = ['GET','POST'])
 def edit(id):
-
-    flash('aun no edita pero ya casi')
-    return redirect(url_for('horarios'))
+    if request.method == 'POST':
+        id = id
+        mensaje = ""
+        hn = Horarios.query.filter(Horarios.id == id).first()
+        n_escala = request.form['escala']
+        n_horario = request.form['horario']
+        n_anden = request.form['anden']
+        if len(n_escala) == 0 or len(n_horario) == 0 or len(n_anden) == 0:
+            mensaje = "Error, los campos no pueden quedar vacios."
+        else:
+            hn.escala = n_escala
+            hn.horario = n_horario
+            hn.anden = n_anden
+            db.session.add(hn)
+            db.session.commit()
+            mensaje = "El horario fue modificado satisfactoriamente."
+    flash(mensaje)
+    return redirect(url_for('horarios'))                
 
 
 @app.route('/delete/<id>', methods = ['GET'])
@@ -112,6 +128,28 @@ def delete(id):
     flash('Horario Eliminado')
         
     return redirect(url_for('horarios'))
+
+
+@app.route('/modal/<id>', methods = ['GET', 'POST'])
+def modal(id):
+    id = id 
+    return render_template('modal.html', horario = Horarios.query.filter(Horarios.id == id).first())
+
+@app.route('/time', methods = ['POST'])
+def time():
+    if request.method == 'POST':
+        time = request.form[time]
+        if time is None:
+            mensaje = "Error el tiempo debe ser un valor valido en segundos."
+        else:
+            t = Terminal.query.first()
+            t.time = time
+            db.session.add(t)
+            db.session.commit()
+            mensaje = "Los parametros de tiempo de visualización se cambiaron de manera correcta."    
+
+    flash(mensaje)
+    return redirect(render_template('horarios'))
 
 if __name__ == '__main__':
     db.create_all()

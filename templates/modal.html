@@ -1,29 +1,18 @@
 {% extends 'base.html' %}
 
-    
- 
-    <!---------Campos Ocultos---------->
-    {% block hide %}
-    {% for i in corridas %}
-        <label class="none" id="datad{{i.id}}">{{i.destino}}</label> 
-        <label class="none" id="data{{i.id}}">{{i.escala}}</label><br>
-     {% endfor %}   
-     {% endblock %}
-    {% block content %}
+{% block content %}
 
       <!--------Contenido del titulo------------->
 
       <div class="row justify-content-center mb-3">
         <h2 class=" d-flex justify-content-center">Horarios Servicio Intermedio</h2>
       </div>
-
-      <!---------Ajustador de tiempo de transición---------->
       <div class="row">
         <div class="col-3 bg-transparent shadow-lg m-2">
           <div class="input-group input-group-sm m-2">
             <span class="input-group-text" id="inputGroup-sizing-sm">Tiempo (S)</span>
             <input type="number" class="form-control" name="terminal">
-            <a href="/time" class="btn btn-outline-success">Cambiar</a>
+            <a href="/change_terminal" class="btn btn-outline-success">Cambiar</a>
           </div>
         </div>
       </div>
@@ -100,7 +89,7 @@
                 <td>{{i.horario}}</td>
                 <td>{{i.anden}}</td>
                 <td>
-                  <a href="/modal/{{i.id}}" class="btn btn-sm btn-outline-success">Editar</a>
+                  <a href="/edit/{{i.id}}" class="btn btn-sm btn-outline-success">Editar</a>
                   <a href="/delete/{{i.id}}" class=" btn btn-sm btn-outline-secondary">Eliminar</a>
                 </td>
               </tr>
@@ -109,28 +98,53 @@
           </table>
       </div>
     {% endblock %}   
-        
 
-      
+    {% block modal %}
 
+		<div class="modal fade " id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="Flase">
+		  <div class="modal-dialog">
+		    <div class="modal-content" >
+		      <div class="modal-header" >
+		        <h5 class="modal-title">Editar Horario</h5>
+		      </div>
+		      <div class="modal-body" >
+		        <form action="/edith/{{horario.id}}" method="post">
+		          <div class="mb-3">
+		            <label for="recipient-name" class="col-form-label">Escalas</label>
+		            <textarea class="form-control" id="escalas" name="escala">{{horario.escala}} </textarea>
+		          </div>
+		          <div class="mb-3">
+		            <label for="message-text" class="col-form-label">Horarios</label>
+		            <textarea class="form-control" id="horarios" name="horario">{{horario.horario}} </textarea>
+		          </div>
+		          <div class="mb-3">
+		            <label for="message-text" class="col-form-label">Anden</label>
+		            <input type="text" class="form-control" id="anden" name="anden" value="{{horario.anden}}">
+		            <input type="text" name="id" value="{{horario.id}}" style="display: none;">
+		          </div>
+		          <div class="modal-footer">
+		        		<a href="/horarios" class="btn btn-outline-secondary">Cancelar</a>
+		        		<button class="btn btn-outline-success" type="submit">Guardar</button>
+		      		</div>
+		        </form>
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
+    {% endblock %}
+    		
+    {% block script%}
+    	<script>
 
+    	$(document).ready(function(){
+    		$('#modal').modal('show', {backdrop: 'static', keyboard: false}) 		 
+    	})
+    	$('#modal').on('hide.bs.modal', function (e) {
+    		e.preventDefault();
+    		e.stopPropagation();
+    		return false;
+		});
 
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-  
+    	</script>
+    {% endblock %}
