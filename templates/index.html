@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+
+
+
+{% block content %}
+
+
+<div class="container">
+	<div class="row text-center mt-2">
+		<h1>Gestor de Pantallas Au Intermedio</h1>
+	</div>	
+	<div class="row" style="height: 33rem">
+		<div class="col-6 d-flex justify-content-center align-items-center">
+			<div class="card shadow-lg" style="width: 18rem;">
+  				<a href="/corridas"><img src="{{ url_for('static', filename = '/img/autobus.jpg') }}" class="card-img-top" alt="..."></a>
+  				<div class="card-body">
+    			<h3 class="card-text text-center">Alta de Corridas</h3></div>
+			</div>
+		</div>
+		<div class="col-6 d-flex justify-content-center align-items-center">
+			<div class="card shadow-lg" style="width: 18rem;">
+  				<a href="/horarios"><img src="{{ url_for('static', filename = '/img/calendario.jpg') }}" class="card-img-top" alt="..."></a>
+  				<div class="card-body">
+    			<h3 class="card-text text-center">Alta de Horarios</h3></div>
+			</div>
+		</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+{% endblock %}

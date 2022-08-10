@@ -158,19 +158,17 @@ def horarios():
 
     return render_template('horarios.html', horarios = Horarios.query, corridas = Corrida.query, time = Time.query.first())        
 
-@app.route('/edith/<id>', methods = ['GET','POST']) # Ruta para modificacion de Horarios
+@app.route('/edith/<id>', methods = ['GET','POST']) # Ruta para editar horarios
 def edit(id):
     if request.method == 'POST':
         id = id
         mensaje = ""
         hn = Horarios.query.filter(Horarios.id == id).first()
-        n_escala = request.form['escala']
         n_horario = request.form['horario']
         n_anden = request.form['anden']
-        if len(n_escala) == 0 or len(n_horario) == 0 or len(n_anden) == 0:
+        if len(n_horario) == 0 or len(n_anden) == 0:
             mensaje = "Error: los campos no pueden quedar vacios."
         else:
-            hn.escala = n_escala
             hn.horario = n_horario
             hn.anden = n_anden
             db.session.add(hn)
@@ -216,7 +214,7 @@ def time():
                 db.session.add(t)
                 db.session.commit()
 
-            mensaje=("El tiempo de transcición fue modificado correctamente a {} segundos.".format(time))
+            mensaje=("El tiempo de transición fue modificado correctamente a {} segundos.".format(time))
 
 
 

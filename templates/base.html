@@ -6,6 +6,8 @@
 	<title>{% block title %}{% endblock %} </title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename ='/css/bootstrap.min.css' )}} ">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/css/main.css')}}">
+<!-------------------- Table style ---------------------------------------->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/css/datatable.css')}}">	
 </head>
 <body>
 	
@@ -46,16 +48,18 @@
 	    {% endwith %}
 	<!------------ Contenido------------------------->
 	    
-			<div class="row mt-2 ">
+			<div class="row mt-1 ">
 				{% block content %}{% endblock %}
 			</div>
 		</div>
 		{% block modal %}{% endblock %}
 
-<!-------------------------JaavaScripts----------------------------------------->
-   <script src="{{url_for('static', filename = '/js/bootstrap.bundle.min.js')}} "></script>
+<!-------------------------JavaScripts----------------------------------------->
+   <script src="{{url_for('static', filename = 'js/bootstrap.bundle.min.js')}} "></script>
    <script src="{{url_for('static', filename ='js/main.js')}} "></script>
    <script src="{{url_for('static', filename ='js/jquery.js')}} "></script>
+<!-----------------------  DataTable Script ----------------------------------->
+	 <script src="{{url_for('static', filename ='js/datatable.js')}} "></script>  
 
 </body>
 	{% block script %}{% endblock %}

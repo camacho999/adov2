@@ -10,7 +10,7 @@
     {% block content %}
 <!------------------ Titulo -------------------->
 
-      <div class="row justify-content-center mb-3 mt-5">
+      <div class="row justify-content-center ">
         <h1 class=" d-flex justify-content-center">Corridas Servicio Intermedio</h1>
       </div>
 
@@ -65,8 +65,8 @@
 
 <!--------------- Contenedor de tabla -------------------->
         <div class="tablecontent col-md-12 col-sm-12 col-lg-6 rounded-2 m-2 shadow-lg bg-transparent">
-          <h2 class="mb-5 text-center">Horarios agregados</h2>
-          <table class="table table-sm table-striped align-middle">
+          <h2 class="mb-2 text-center">Horarios agregados</h2>
+          <table class="table table-sm table-striped align-middle" id="myTable">
             <thead>
               <tr>
                 <th>Destino</th>
@@ -88,6 +88,24 @@
               {% endfor %}
             </tbody>
           </table>
+          <br>
       </div>
+
+    {% endblock %}
+
+    {% block script %}
+
+      <script>
+        
+        $(document).ready( function () {
+          $('#myTable').DataTable(
+          {
+            scrollY: 370,
+            "lengthChange" : false,
+            "pageLength": 4
+          });
+        });
+
+      </script>
 
     {% endblock %}
