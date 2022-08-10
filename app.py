@@ -27,7 +27,11 @@ class Terminal(db.Model):
     __tablename__ = "terminal"
     id = db.Column(db.Integer, primary_key = True)
     terminal = db.Column(db.String, nullable = False)
-    time = db.column(db.Integer)
+
+class Time(db.Model):
+    __tablename__ = "time"
+    id = db.Column(db.Integer, primary_key = True)
+    time = db.Column(db.Integer)
 
 class Horarios(db.Model):
     __tablename__ = "horario"
@@ -45,12 +49,12 @@ class Horarios(db.Model):
 
 
 #creacion de rutas
-@app.route('/', methods = ['GET'])
+@app.route('/', methods = ['GET'])  # Pagina Principal
 def panel():
-	return render_template('index.html')
+	return render_template('index.html') 
 
 
-@app.route('/corridas', methods = ['GET', 'POST'])
+@app.route('/corridas', methods = ['GET', 'POST']) #vista de Corridas
 def corridas():
     if request.method == 'POST':
         mensaje = ""
@@ -70,10 +74,67 @@ def corridas():
 
         return redirect(url_for('corridas'))
 
-    return render_template('corridas.html', corridas = Corrida.query)
+    return render_template('corridas.html', corridas = Corrida.query, terminal = Terminal.query.first())
+
+@app.route('/editar_terminal', methods = ['POST']) #Actualización de Terminal
+def editar_terminal():
+    if request.method == 'POST':
+        mensaje = ""
+        terminal = request.form['terminal']
+        t = Terminal.query.first()
+        if t is None:
+            t = Terminal()
+            t.terminal = terminal
+            db.session.add(t)
+            db.session.commit()
+        else:    
+            t.terminal = terminal 
+            db.session.add(t)
+            db.session.commit()
+
+        mensaje = "La terminal fue actualizada correctamente a {}.".format(terminal)
+
+    flash(mensaje)    
+    return redirect(url_for('corridas'))    
+
+@app.route('/modal1/<id>', methods = ['GET', 'POST']) # Modal para edicion de corridas
+def modal1(id):
+    id = id 
+    return render_template('modal1.html', corrida = Corrida.query.filter(Corrida.id == id).first())
 
 
-@app.route('/horarios', methods = ['GET', 'POST'])
+@app.route('/edith_corrida/<id>', methods = ['GET','POST']) # Ruta para modificacion de Corridas
+def edit_corrida(id):
+    if request.method == 'POST':
+        id = id
+        mensaje = ""
+        nc = Corrida.query.filter(Corrida.id == id).first()
+        n_escala = request.form['escala']
+        
+        if len(n_escala) == 0:
+            mensaje = "Error: los campos no pueden quedar vacios."
+        else:
+            nc.escala = n_escala
+            db.session.add(nc)
+            db.session.commit()
+            mensaje = "El horario fue modificado satisfactoriamente."
+    flash(mensaje)
+    return redirect(url_for('corridas'))
+
+@app.route('/delete_corridas/<id>', methods = ['GET']) # Funcion para eliminacion de Corridas
+def delete_corridas(id):
+    id = id 
+    Corrida.query.filter(Corrida.id == id).delete()
+    db.session.commit()
+    
+    flash('Corrida Eliminada Satisfactoriamente')
+        
+    return redirect(url_for('corridas'))
+
+
+
+
+@app.route('/horarios', methods = ['GET', 'POST']) # pagina de Horarios
 def horarios():
     if request.method == 'POST':
         mensaje = ""
@@ -97,7 +158,7 @@ def horarios():
 
     return render_template('horarios.html', horarios = Horarios.query, corridas = Corrida.query)        
 
-@app.route('/edith/<id>', methods = ['GET','POST'])
+@app.route('/edith/<id>', methods = ['GET','POST']) # Ruta para modificacion de Horarios
 def edit(id):
     if request.method == 'POST':
         id = id
@@ -107,7 +168,7 @@ def edit(id):
         n_horario = request.form['horario']
         n_anden = request.form['anden']
         if len(n_escala) == 0 or len(n_horario) == 0 or len(n_anden) == 0:
-            mensaje = "Error, los campos no pueden quedar vacios."
+            mensaje = "Error: los campos no pueden quedar vacios."
         else:
             hn.escala = n_escala
             hn.horario = n_horario
@@ -119,7 +180,7 @@ def edit(id):
     return redirect(url_for('horarios'))                
 
 
-@app.route('/delete/<id>', methods = ['GET'])
+@app.route('/delete/<id>', methods = ['GET']) # Funcion para eliminacion de Horarios
 def delete(id):
     id = id 
     Horarios.query.filter(Horarios.id == id).delete()
@@ -130,27 +191,40 @@ def delete(id):
     return redirect(url_for('horarios'))
 
 
-@app.route('/modal/<id>', methods = ['GET', 'POST'])
+@app.route('/modal/<id>', methods = ['GET', 'POST']) # Modal para edicion de horarios
 def modal(id):
     id = id 
     return render_template('modal.html', horario = Horarios.query.filter(Horarios.id == id).first())
 
-@app.route('/time', methods = ['POST'])
+
+@app.route('/time', methods = ['POST']) # Funcion para modificar el tiempo de de las transciciones
 def time():
+    mensaje = ""
     if request.method == 'POST':
-        time = request.form[time]
-        if time is None:
-            mensaje = "Error el tiempo debe ser un valor valido en segundos."
+        time = request.form['time']
+        if int(time) == 0:
+            mensaje = ("El valor proporcionado no es correcto. El tiempo no fue modificado")     
         else:
-            t = Terminal.query.first()
-            t.time = time
-            db.session.add(t)
-            db.session.commit()
-            mensaje = "Los parametros de tiempo de visualización se cambiaron de manera correcta."    
+            t = Time.query.filter(Time.id == 1).first()
+            if t is None:
+                new_time = Time()
+                new_time.time = time
+                db.session.add(new_time)
+                db.session.commit()
+            else:
+                t.time = time
+                db.session.add(t)
+                db.session.commit()
+
+            mensaje=("El tiempo de transcición fue modificado correctamente a {} segundos.".format(time))
+
+
 
     flash(mensaje)
-    return redirect(render_template('horarios'))
+    return redirect(url_for('horarios'))
 
-if __name__ == '__main__':
+
+
+if __name__ == '__main__': #funcion principal
     db.create_all()
     app.run(debug=True)

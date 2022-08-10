@@ -1,0 +1,43 @@
+    {% extends 'base.html' %}
+
+
+    {% block modal %}
+
+		<div class="modal fade " id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="Flase">
+		  <div class="modal-dialog">
+		    <div class="modal-content" >
+		      <div class="modal-header" >
+		        <h5 class="modal-title">Editar Corrida {{corrida.destino}} </h5>
+		      </div>
+		      <div class="modal-body" >
+		        <form action="/edith_corrida/{{corrida.id}}" method="post">
+		          <div class="mb-3">
+		            <label for="recipient-name" class="col-form-label">Escalas</label>
+		            <textarea class="form-control" id="escalas" name="escala">{{corrida.escala}} </textarea>
+		          </div>
+		          <div class="modal-footer">
+		        		<a href="/corridas" class="btn btn-outline-secondary">Cancelar</a>
+		        		<button class="btn btn-outline-success" type="submit">Guardar</button>
+		      		</div>
+		        </form>
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
+    {% endblock %}
+    		
+    {% block script%}
+    	<script>
+
+    	$(document).ready(function(){
+    		$('#modal').modal('show', {backdrop: 'static', keyboard: false}) 		 
+    	})
+    	$('#modal').on('hide.bs.modal', function (e) {
+    		e.preventDefault();
+    		e.stopPropagation();
+    		return false;
+		});
+
+    	</script>
+    {% endblock %}

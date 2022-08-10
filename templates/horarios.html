@@ -14,36 +14,43 @@
       <!--------Contenido del titulo------------->
 
       <div class="row justify-content-center mb-3">
-        <h2 class=" d-flex justify-content-center">Horarios Servicio Intermedio</h2>
+        <h2 class=" d-flex justify-content-center title">Horarios Servicio Intermedio</h2>
       </div>
 
       <!---------Ajustador de tiempo de transición---------->
       <div class="row">
         <div class="col-3 bg-transparent shadow-lg m-2">
-          <div class="input-group input-group-sm m-2">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Tiempo (S)</span>
-            <input type="number" class="form-control" name="terminal">
-            <a href="/time" class="btn btn-outline-success">Cambiar</a>
-          </div>
+          <form action="/time" method="post">
+            <div class="input-group input-group-sm m-2">
+
+              <span class="input-group-text" id="inputGroup-sizing-sm">Tiempo (S)</span>
+              <input type="number" class="form-control text-end" name="time" value="10" required>              
+              <button class="btn btn-outline-success" type="submit">Cambiar</button>
+
+            </div>
+          </form>          
         </div>
       </div>
+
       <!-----Contenedor de Formulario---------->
       <div class="formcontent col-md-12 col-ms-12 col-lg-4 m-2 rounded-2 shadow-lg bg-transparent">
         <h2 class="mb-5">Generar nuevo horario</h2>
         <form class="mb-5" action="/horarios" method="post">
-      <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Destino
-        </button>
-        <ul class="dropdown-menu">
-          {% for i in corridas %}
-          <li><a class="dropdown-item" href="#" onclick="seleccion({{i.id}})">{{i.destino}}</a></li>
-          {% endfor%}
-        </ul>
-        <input type="text" id="destino"name="destino" class="form-control form-control-sm" aria-label="Text input with dropdown button" readonly>
-        <span class="input-group-text">Anden-></span>
-        <input type="number" id="anden" name="anden" class="form-control form-control-sm">
-      </div>
+        <div class="input-group mb-3">
+
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Destino
+          </button>
+          <ul class="dropdown-menu">
+            {% for i in corridas %}
+            <li><a class="dropdown-item" href="#" onclick="seleccion({{i.id}})">{{i.destino}}</a></li>
+            {% endfor%}
+          </ul>
+          <input type="text" id="destino"name="destino" class="form-control form-control-sm" aria-label="Text input with dropdown button" readonly>
+          <span class="input-group-text">Anden-></span>
+          <input type="number" id="anden" name="anden" class="form-control form-control-sm">
+        
+        </div>
 
       <div class="input-group mb-3">
         <span class="input-group-text">Escalas</span>

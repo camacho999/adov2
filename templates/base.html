@@ -39,17 +39,17 @@
 	    {% with message = get_flashed_messages() %}
 	    {% if message %}
 	    <div class="alert alert-warning alert-dismissible fade show rounded-3 shadow" role="alert">
-	    <strong class="text-body">{{message}} </strong>
+	    <strong class="text-body">{{message[0]}} </strong>
 	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	    </div>
 	    {% endif %}
 	    {% endwith %}
 	<!------------ Contenido------------------------->
 	    
-		<div class="row mt-2 ">
-			{% block content %}{% endblock %}
+			<div class="row mt-2 ">
+				{% block content %}{% endblock %}
+			</div>
 		</div>
-	</div>
 		{% block modal %}{% endblock %}
 
 <!-------------------------JaavaScripts----------------------------------------->
