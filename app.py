@@ -156,7 +156,7 @@ def horarios():
         flash(mensaje)
         return redirect(url_for('horarios'))
 
-    return render_template('horarios.html', horarios = Horarios.query, corridas = Corrida.query)        
+    return render_template('horarios.html', horarios = Horarios.query, corridas = Corrida.query, time = Time.query.first())        
 
 @app.route('/edith/<id>', methods = ['GET','POST']) # Ruta para modificacion de Horarios
 def edit(id):
