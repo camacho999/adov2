@@ -17,13 +17,13 @@
 
 <!---------Ajuste de terminal  ---------->
       <div class="row">
-        <div class="col-3 bg-transparent shadow-lg m-2">
+        <div class="col-2 bg-transparent shadow-lg ms-4">
           <form action="/editar_terminal" method="post">
             <div class="input-group input-group-sm m-2">
 
-              <span class="input-group-text" id="inputGroup-sizing-sm">Terminal</span>
-              <input type="text" class="form-control text-center" name="terminal" value="{{terminal.terminal}}" required>              
-              <button class="btn btn-outline-success" type="submit">Cambiar</button>
+              <span class="input-group-text">Terminal</span>
+              <input type="text" class="form-control  form-control-sm text-center" name="terminal" value="{{terminal.terminal}}" required>              
+              <button class="btn btn-outline-success btn-sm" type="submit">Cambiar</button>
 
             </div>
           </form>          
@@ -31,32 +31,33 @@
       </div>
 
 
+      <div class="row justify-content-between">
 <!---------- Contenedor de formulario ------------->      
-      <div class="formcontent col-ms-12 col-md-12 col-lg-5 m-2 rounded-2 shadow-lg bg-transparent">
+      <div class="formcontent col-ms-12 col-md-12 col-lg-3 ms-4 rounded-2 shadow-lg bg-transparent">
         
         <h2 class="mb-4">Generar nuevo corrida</h2>  
         <form action="/corridas" method="post">
 
-          <div class="input-group mb-3">
+          <div class="input-group input-group-sm mb-3">
             <span class="input-group-text">Terminal</span>
-            <input type="text" class="form-control" placeholder="Destino" name="destino">
+            <input type="text" class="form-control form-control-sm" placeholder="Destino" name="destino">
           </div>
 
-          <div class="input-group mb-3">
+          <div class="input-group input-group-sm mb-3">
             <span class="input-group-text">Escalas</span>
             <input type="text" class="form-control" placeholder="Ciudad o Localidad" id="escala">
             <span class="input-group-text">$</span>
             <input type="number" class="form-control" placeholder="$00.00" id="costo">
-            <button class="btn btn-outline-secondary" type="button" id="precio" onclick="add_escala()">Agregar</button>
+            <button class="btn btn-sm btn-outline-secondary" type="button" id="precio" onclick="add_escala()">Agregar</button>
           </div>
 
-          <div class="input-group mb-3">
+          <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="escala">Resumen</span>
             <textarea class="form-control" placeholder="" id="escalas" name="escala" readonly></textarea>
           </div>
 
-          <div class="input-group mb-3">
-            <button class=" btn btn-outline-success" type="submit">Agregar Corrida</button>
+          <div class="input-group input-group-sm mb-3">
+            <button class=" btn btn-sm btn-outline-success" type="submit">Agregar Corrida</button>
           </div>
 
         </form>
@@ -64,7 +65,7 @@
       </div>      
 
 <!--------------- Contenedor de tabla -------------------->
-        <div class="tablecontent col-md-12 col-sm-12 col-lg-6 rounded-2 m-2 shadow-lg bg-transparent">
+        <div class="tablecontent col-md-12 col-sm-12 col-lg-8 rounded-2 m-2 shadow-lg bg-transparent">
           <h2 class="mb-2 text-center">Horarios agregados</h2>
           <table class="table table-sm table-striped align-middle" id="myTable">
             <thead>
@@ -82,7 +83,7 @@
                 <td>{{i.escala}}</td>
                 <td>
                   <a href="/modal1/{{i.id}}" class="btn btn-sm btn-outline-success">Editar</a>
-                  <a href="/delete_corridas/{{i.id}}" class=" btn btn-sm btn-outline-secondary">Eliminar</a>
+                  <a href="/delete_corridas/{{i.id}}" class=" btn btn-sm btn-outline-danger">Eliminar</a>
                 </td>
               </tr>
               {% endfor %}
@@ -90,7 +91,7 @@
           </table>
           <br>
       </div>
-
+      </div>
     {% endblock %}
 
     {% block script %}
