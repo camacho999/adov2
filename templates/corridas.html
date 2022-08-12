@@ -17,13 +17,13 @@
 
 <!---------Ajuste de terminal  ---------->
       <div class="row">
-        <div class="col-2 bg-transparent shadow-lg ms-4">
+        <div class="col-3 bg-transparent shadow-lg ms-4 rounded-3  m-2">
           <form action="/editar_terminal" method="post">
             <div class="input-group input-group-sm m-2">
 
               <span class="input-group-text">Terminal</span>
               <input type="text" class="form-control  form-control-sm text-center" name="terminal" value="{{terminal.terminal}}" required>              
-              <button class="btn btn-outline-success btn-sm" type="submit">Cambiar</button>
+              <button class="btn btn-outline-success btn-sm me-3" type="submit">Cambiar</button>
 
             </div>
           </form>          
@@ -33,9 +33,11 @@
 
       <div class="row justify-content-between">
 <!---------- Contenedor de formulario ------------->      
-      <div class="formcontent col-ms-12 col-md-12 col-lg-3 ms-4 rounded-2 shadow-lg bg-transparent">
-        
-        <h2 class="mb-4">Generar nuevo corrida</h2>  
+      <div class="formcontent col-ms-12 col-md-12 col-lg-3 ms-4 rounded-5 shadow-lg bg-transparent">
+        <div class="row bg-ligth">
+            <h2 class="mb-4">Generar nueva corrida</h2>
+        </div>
+          
         <form action="/corridas" method="post">
 
           <div class="input-group input-group-sm mb-3">
@@ -48,7 +50,7 @@
             <input type="text" class="form-control" placeholder="Ciudad o Localidad" id="escala">
             <span class="input-group-text">$</span>
             <input type="number" class="form-control" placeholder="$00.00" id="costo">
-            <button class="btn btn-sm btn-outline-secondary" type="button" id="precio" onclick="add_escala()">Agregar</button>
+            <button class="btn btn-sm btn-outline-dark" type="button" id="precio" onclick="add_escala()">Agregar</button>
           </div>
 
           <div class="input-group input-group-sm mb-3">
@@ -65,9 +67,12 @@
       </div>      
 
 <!--------------- Contenedor de tabla -------------------->
-        <div class="tablecontent col-md-12 col-sm-12 col-lg-8 rounded-2 m-2 shadow-lg bg-transparent">
-          <h2 class="mb-2 text-center">Horarios agregados</h2>
-          <table class="table table-sm table-striped align-middle" id="myTable">
+        <div class="tablecontent col-md-12 col-sm-12 col-lg-8 rounded-5 m-2 shadow-lg bg-transparent">
+          <div class="row light p-3">
+            <h2 class="mb-2 text-center">Horarios agregados</h2>
+          </div>
+          
+          <table class="table table-light table-sm table-striped align-middle table-borderless" id="myTable">
             <thead>
               <tr>
                 <th>Destino</th>
