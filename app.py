@@ -222,6 +222,10 @@ def time():
     return redirect(url_for('horarios'))
 
 
+@app.route('/display', methods = ['GET'])
+def dispay():
+
+    return(render_template('display.html', horario = Horarios.query, terminal = Terminal.query.first(), tiempo = Time.query.first()))
 
 if __name__ == '__main__': #funcion principal
     db.create_all()

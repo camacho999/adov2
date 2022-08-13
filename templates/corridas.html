@@ -10,9 +10,9 @@
     {% block content %}
 <!------------------ Titulo -------------------->
 
-      <div class="row justify-content-center ">
+ <!--     <div class="row justify-content-center ">
         <h1 class=" d-flex justify-content-center">Corridas Servicio Intermedio</h1>
-      </div>
+      </div>-->
 
 
 <!---------Ajuste de terminal  ---------->
@@ -21,9 +21,9 @@
           <form action="/editar_terminal" method="post">
             <div class="input-group input-group-sm m-2">
 
-              <span class="input-group-text">Terminal</span>
+              <span class="input-group-text text-secondary">Terminal</span>
               <input type="text" class="form-control  form-control-sm text-center" name="terminal" value="{{terminal.terminal}}" required>              
-              <button class="btn btn-outline-success btn-sm me-3" type="submit">Cambiar</button>
+              <button class="btn btn-success btn-sm me-3" type="submit">Cambiar</button>
 
             </div>
           </form>          
@@ -33,33 +33,33 @@
 
       <div class="row justify-content-between">
 <!---------- Contenedor de formulario ------------->      
-      <div class="formcontent col-ms-12 col-md-12 col-lg-3 ms-4 rounded-5 shadow-lg bg-transparent">
-        <div class="row bg-ligth">
-            <h2 class="mb-4">Generar nueva corrida</h2>
+      <div class="formcontent col-ms-12 col-md-12 col-lg-3 ms-4 rounded-4 shadow-lg bg-transparent">
+        <div class="row titulo text-center p-3">
+            <h3 class="mb-4 text-secondary">Generar nueva corrida</h3>
         </div>
           
         <form action="/corridas" method="post">
 
           <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text">Terminal</span>
+            <span class="input-group-text text-secondary">Terminal</span>
             <input type="text" class="form-control form-control-sm" placeholder="Destino" name="destino">
           </div>
 
           <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text">Escalas</span>
+            <span class="input-group-text text-secondary">Escalas</span>
             <input type="text" class="form-control" placeholder="Ciudad o Localidad" id="escala">
             <span class="input-group-text">$</span>
             <input type="number" class="form-control" placeholder="$00.00" id="costo">
-            <button class="btn btn-sm btn-outline-dark" type="button" id="precio" onclick="add_escala()">Agregar</button>
+            <button class="btn btn-sm btn-dark" type="button" id="precio" onclick="add_escala()">Agregar</button>
           </div>
 
           <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="escala">Resumen</span>
+            <span class="input-group-text text-secondary" id="escala">Resumen</span>
             <textarea class="form-control" placeholder="" id="escalas" name="escala" readonly></textarea>
           </div>
 
           <div class="input-group input-group-sm mb-3">
-            <button class=" btn btn-sm btn-outline-success" type="submit">Agregar Corrida</button>
+            <button class=" btn btn-sm btn-success" type="submit">Agregar Corrida</button>
           </div>
 
         </form>
@@ -67,12 +67,12 @@
       </div>      
 
 <!--------------- Contenedor de tabla -------------------->
-        <div class="tablecontent col-md-12 col-sm-12 col-lg-8 rounded-5 m-2 shadow-lg bg-transparent">
-          <div class="row light p-3">
-            <h2 class="mb-2 text-center">Horarios agregados</h2>
+        <div class="tablecontent col-md-12 col-sm-12 col-lg-8 rounded-4 m-2 shadow-lg bg-transparent">
+          <div class="row p-3 titulo">
+            <h3 class="mb-2 text-center text-secondary">Horarios agregados</h3>
           </div>
           
-          <table class="table table-light table-sm table-striped align-middle table-borderless" id="myTable">
+          <table class="table table-defauld table-sm table-striped align-middle table-borderless" id="myTable">
             <thead>
               <tr>
                 <th>Destino</th>
@@ -84,11 +84,11 @@
 
               {% for i in corridas %}
               <tr>
-                <td>{{i.destino}}</td>
-                <td>{{i.escala}}</td>
+                <td class="text-secondary">{{i.destino}}</td>
+                <td class="text-secondary">{{i.escala}}</td>
                 <td>
-                  <a href="/modal1/{{i.id}}" class="btn btn-sm btn-outline-success">Editar</a>
-                  <a href="/delete_corridas/{{i.id}}" class=" btn btn-sm btn-outline-danger">Eliminar</a>
+                  <a href="/modal1/{{i.id}}" class="btn btn-sm btn-success">Editar</a>
+                  <a href="/delete_corridas/{{i.id}}" class=" btn btn-sm btn-danger">Eliminar</a>
                 </td>
               </tr>
               {% endfor %}

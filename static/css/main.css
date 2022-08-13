@@ -7,3 +7,112 @@ bodyy{
 	background: radial-gradient(circle, rgba(143,143,143,1) 0%, rgba(198,196,196,1) 56%, rgba(227,227,227,1) 100%);
 }
 
+
+
+.triangulosup{
+  width: 0px;
+  height: 0px;
+  border-top: 75px solid #ed1313;
+  border-left: 0px solid transparent;
+  border-right: 300px solid transparent;
+  position: absolute;
+  top: 0;
+}
+
+.trianguloinf{
+  width: 0px;
+  height: 0px;
+  border-bottom: 100px solid #ed1313;
+  border-left: 300px solid transparent;
+  border-right: 0 solid transparent;
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+}
+
+.logo{
+  height: 100px;
+  width: auto;
+  background-image: url('../img/au.png');
+  background-size: 200px 200px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.marca h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 2.8rem;
+  color: #fc790d;
+  margin-bottom: 0.5rem;
+}
+.destino{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom: .5px solid rgb(14, 13, 14, .2);
+}
+.escalas{
+  border-bottom: 5px solid red;
+  border-radius: 10px;
+  background-color: #ffffff;
+
+}
+.pin-icon{
+  width: 50px;
+  height: 30px;
+  background-color: red;
+  background-image: url("../img/pin.png");
+  background-repeat: no-repeat;
+  background-size: 16px 20px;
+  background-position: center;
+  border-radius: 5px;
+}
+.wach-icon{
+  width: 50px;
+  height: 30px;
+  background-color: red;
+  background-image: url("../img/watch.png");
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: center;
+  border-radius: 5px;
+}
+.horarios{
+  border-bottom: 5px solid red;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.row-title{
+  font-size: 1.4rem;
+  border-bottom: 1px solid black;
+}
+.item{
+  border-right: 1.5px solid red ;
+  text-align: center;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right:7px;
+}
+.row-title{
+  font-weight: bold;
+}
+
+
+
+#destinos{
+  resize:none;
+}
+#horarios{
+  resize: none;
+}
+.opciones_viajes{
+  justify-content: center;
+  padding: 5px;
+}
+.anden{
+  font-size: 3rem;
+  font-weight: bold;
+}
