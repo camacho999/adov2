@@ -225,8 +225,8 @@ def time():
 @app.route('/display', methods = ['GET'])
 def dispay():
 
-    return(render_template('display.html', horario = Horarios.query, terminal = Terminal.query.first(), tiempo = Time.query.first()))
+    return(render_template('display.html', horario = Horarios.query.all(), terminal = Terminal.query.first(), tiempo = Time.query.first()))
 
 if __name__ == '__main__': #funcion principal
     db.create_all()
-    app.run(debug=True)
+    app.run(debug=True, host = "0.0.0.0")

@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	{% set t = horario|length * tiempo.time %}
+	<meta http-equiv="refresh" content="{{t}}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Display</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename ='/css/bootstrap1.min.css' )}} ">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = '/css/main.css')}}">
 </head>
 <body>
+
 <div class="triangulosup"></div>
 
 <!--------- Contanido Carrusel--------------------->
 <div class="container-fluid">
-	<did class="carousel sline" id="carousel" data-bs-ride = "carousel">
+	<did class="carousel sline carousel-fade" id="carousel" data-bs-ride = "carousel">
 		<div class="carousel-inner">
 			{% for i in horario %}
 			{% if loop.index == 1 %}
@@ -23,59 +26,49 @@
 				<div class="row-logo row">
 					<div class="logo col"></div>
 				</div>
-				<div class="marca row">
-					<h1>Autobuses Intermedios</h1>
+				<div class="marca row text-center fw-bolder">
+					<p class="h1">Autobuses Intermedios</p>
 				</div>
 				<div class="destino row">
-					<img src="{{url_for('static', filename = '/img/autobus.png')}}" alt="bus" class="col-1">
-					<h3 class="col-8 h2">CORRIDA {{terminal.terminal}} - {{i.destino}} </h3>
-					<img src="{{url_for('static', filename = '/img/map.png')}}" alt="" class="col-1">
-					<p class="anden">Anden: {{i.anden}}</p>
+					<img class="img-fluid" src="{{url_for('static', filename = '/img/autobus.png')}}" alt="bus" class="col-1">
+					<p class="col-8 h2 fw-bolder">CORRIDA {{terminal.terminal}} - {{i.destino}} </p>
+					<img class="img-fluid" src="{{url_for('static', filename = '/img/map.png')}}" alt="" class="col-1">
+					<p class="h1 fw-bolder">Anden: {{i.anden}}</p>
 				</div>
 <!----------------area central de la informacion------------->
-				<div class="row infocontent justify-content-evenly mt-3">
-					<!-- escalas -->
-					<div class="col-7 escalas">
-						<div class="row row-title">
-							<div class="col1 pin-icon"></div>
-							<p class="title-escalas col h2">Escalas</p>
-							{% set esc = i.escala.split(',') %}
+				<div class="row justify-content-between">
+					<div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
+						<div class="row border-bottom border-dark border-2">
+							<div class="col1 pin-icon ms-3 mt-2"></div>
+							<p class="col h2">Escalas</p>
 						</div>
-						<div class="row escalas-content my-3">
+				<!--------------------Escalas ----------->
+						{% set esc = i.escala.split(',') %}
+						<div class="d-flex escalas p-3">
 							{% for e in esc %}
-
-							<div class="col-3">
-								<p class="border-end border-danger h4 text-center item">{{e}}</p>
-							</div>
+							<p class="flex-grow h2 border-end border-danger p-2 fw-bolder">{{e}}</p>
 							{% endfor %}
 						</div>
 					</div>
-	<!-------------------- Horarios -------------------->
-					<div class="col-4 horarios">
+			<!------------- Horarios -------------------------->
+					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 horarios me-5">
 						<div class="row row-title">
-							<div class="col-2 wach-icon"></div>
-							<p class="title-horario col h2">Horarios</p>
-
-						</div>
+							<div class="col-2 wach-icon mt-2"></div>
+							<p class="title-horario col h2">Horarios</p> </div>
 						{% set hor = i.horario.split(',') %}
 						<div class="row horarios-content my-3">
-							<div class="d-flex flex-warp">
+							<div class="d-flex flex-wrap aling-items-center">
 								{% for h in hor %}
-								<div class="border-end border-danger px-2">
-									<p class="text-center h4">{{h}}</p>
+								<div class="mb-3 border-end border-danger px-2 aling-items-center">
+									<p class="text-center h2 fw-semibold">{{h}}</p>
 								</div>
 								{% endfor %}
 							</div>
 						</div>
 					</div>
-				</div>
-
-
-
-
+					
+				</div>		
 			</div>
-
-
 			{% endfor %}
 		</div>
 	</did>
